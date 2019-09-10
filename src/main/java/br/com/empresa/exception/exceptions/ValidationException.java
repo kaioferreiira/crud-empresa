@@ -1,4 +1,4 @@
-package br.com.empresa.exception;
+package br.com.empresa.exception.exceptions;
 
 public class ValidationException extends RuntimeException {
     private static final long serialVersionUID = 1L;

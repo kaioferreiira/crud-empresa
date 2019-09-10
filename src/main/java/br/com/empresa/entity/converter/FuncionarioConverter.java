@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import br.com.empresa.dto.FuncionarioDTO;
 import br.com.empresa.entity.Funcionario;
-import br.com.empresa.exception.ValidationException;
+import br.com.empresa.exception.exceptions.ValidationException;
 
 public class FuncionarioConverter {
 

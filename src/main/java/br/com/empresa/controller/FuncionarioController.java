@@ -1,6 +1,7 @@
 package br.com.empresa.controller;
 
 import java.util.List;
+import java.util.Objects;
 
 import br.com.empresa.dto.FuncionarioDTO;
 import br.com.empresa.service.FuncionarioService;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +31,6 @@ public class FuncionarioController implements FuncionarioControllerEndpoint {
     public ResponseEntity<Void> adicionaFuncionario(FuncionarioDTO funcionarioDTO) {
 
         funcionarioService.adicionaFuncionario(funcionarioDTO);
-
         return ResponseEntity.ok().build();
     }
 
@@ -45,12 +46,22 @@ public class FuncionarioController implements FuncionarioControllerEndpoint {
     }
 
     @Override
+    @GetMapping("/findAll")
     public ResponseEntity<List<FuncionarioDTO>> buscaFuncionariosList() {
-        return null;
+
+        ResponseEntity<List<FuncionarioDTO>> response = ResponseEntity.ok(funcionarioService.buscaFuncionariosList());
+        if (Objects.isNull(response.getBody())) {
+            response = ResponseEntity.noContent().build();
+        }
+        return response;
     }
 
     @Override
-    public ResponseEntity<Void> atualizaFuncionario(Long codigoFuncionario, FuncionarioDTO funcionario) {
+    @PutMapping("/{codigoFuncionario}")
+    public ResponseEntity<Void> atualizaFuncionario(Long codigoFuncionario, FuncionarioDTO funcionarioDTO) {
+
+        funcionarioService.atualizaFuncionario(codigoFuncionario, funcionarioDTO);
+
         return null;
     }
 
