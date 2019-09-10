@@ -1,4 +1,4 @@
-package br.com.empresa.exception;
+package br.com.empresa.impl.business.exception;
 
 
 public abstract class FuncionarioExceptionMessage {

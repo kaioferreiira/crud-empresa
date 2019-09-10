@@ -1,16 +1,15 @@
-package br.com.empresa.service;
-
-import static br.com.empresa.exception.FuncionarioExceptionMessage.*;
+package br.com.empresa.impl.business.service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import br.com.empresa.dto.FuncionarioDTO;
-import br.com.empresa.entity.Funcionario;
-import br.com.empresa.entity.converter.FuncionarioConverter;
-import br.com.empresa.exception.exceptions.ObjectNotFoundException;
-import br.com.empresa.repository.FuncionarioRepository;
+import br.com.empresa.impl.business.dto.FuncionarioDTO;
+import br.com.empresa.impl.business.entity.Funcionario;
+import br.com.empresa.impl.business.entity.converter.FuncionarioConverter;
+import br.com.empresa.impl.business.exception.exceptions.ObjectNotFoundException;
+import br.com.empresa.impl.business.exception.FuncionarioExceptionMessage;
+import br.com.empresa.impl.business.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +44,7 @@ public class FuncionarioServiceImpl  implements FuncionarioService{
     @Override
     public void atualizaFuncionario(Long codigoFuncionario, FuncionarioDTO funcionarioDTO) {
 
-        funcionarioRepository.findById(codigoFuncionario).orElseThrow(() -> new ObjectNotFoundException(ERRO_ENCONTRAR_DADOS_DO_FUNCIONARIO));
+        funcionarioRepository.findById(codigoFuncionario).orElseThrow(() -> new ObjectNotFoundException(FuncionarioExceptionMessage.ERRO_ENCONTRAR_DADOS_DO_FUNCIONARIO));
 
         Funcionario  funcionarioEntity = FuncionarioConverter.toEntity(funcionarioDTO);
         funcionarioEntity.setId(codigoFuncionario);

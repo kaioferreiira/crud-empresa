@@ -1,9 +1,9 @@
-package br.com.empresa;
+package br.com.empresa.impl;
 
-import br.com.empresa.dto.FuncionarioDTO;
-import br.com.empresa.entity.Funcionario;
-import br.com.empresa.repository.FuncionarioRepository;
-import br.com.empresa.service.FuncionarioServiceImpl;
+import br.com.empresa.impl.business.dto.FuncionarioDTO;
+import br.com.empresa.impl.business.entity.Funcionario;
+import br.com.empresa.impl.business.repository.FuncionarioRepository;
+import br.com.empresa.impl.business.service.FuncionarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

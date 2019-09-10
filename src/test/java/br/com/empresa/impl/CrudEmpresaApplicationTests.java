@@ -1,4 +1,4 @@
-package br.com.empresa;
+package br.com.empresa.impl;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

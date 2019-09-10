@@ -1,4 +1,4 @@
-package br.com.empresa.exception.exceptions;
+package br.com.empresa.impl.business.exception.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
 

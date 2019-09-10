@@ -1,18 +1,17 @@
-package br.com.empresa.entity.converter;
-
-import static br.com.empresa.exception.FuncionarioExceptionMessage.ERRO_DADOS_INVALIDOS_ASSOCIADO;
+package br.com.empresa.impl.business.entity.converter;
 
 import java.util.Objects;
 
-import br.com.empresa.dto.FuncionarioDTO;
-import br.com.empresa.entity.Funcionario;
-import br.com.empresa.exception.exceptions.ValidationException;
+import br.com.empresa.impl.business.dto.FuncionarioDTO;
+import br.com.empresa.impl.business.entity.Funcionario;
+import br.com.empresa.impl.business.exception.exceptions.ValidationException;
+import br.com.empresa.impl.business.exception.FuncionarioExceptionMessage;
 
 public class FuncionarioConverter {
 
     public static Funcionario toEntity(FuncionarioDTO funcionarioDTO) {
         if (Objects.isNull(funcionarioDTO)) {
-            throw new ValidationException(ERRO_DADOS_INVALIDOS_ASSOCIADO);
+            throw new ValidationException(FuncionarioExceptionMessage.ERRO_DADOS_INVALIDOS_ASSOCIADO);
         }
         return new Funcionario(funcionarioDTO.getId(), funcionarioDTO.getNome(),funcionarioDTO.getEmail(), funcionarioDTO.getCelular(),funcionarioDTO.getIdade());
     }

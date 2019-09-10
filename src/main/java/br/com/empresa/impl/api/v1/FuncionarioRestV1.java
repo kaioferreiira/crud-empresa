@@ -1,10 +1,10 @@
-package br.com.empresa.controller;
+package br.com.empresa.impl.api.v1;
 
 import java.util.List;
 import java.util.Objects;
 
-import br.com.empresa.dto.FuncionarioDTO;
-import br.com.empresa.service.FuncionarioService;
+import br.com.empresa.impl.business.dto.FuncionarioDTO;
+import br.com.empresa.impl.business.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping({"/funcionarios"})
-public class FuncionarioController implements FuncionarioControllerEndpoint {
+public class FuncionarioRestV1 implements FuncionarioRestEndpoint {
 
 
     private FuncionarioService funcionarioService;
 
     @Autowired
-    public FuncionarioController(FuncionarioService funcionarioService) {
+    public FuncionarioRestV1(FuncionarioService funcionarioService) {
         this.funcionarioService = funcionarioService;
     }
 

@@ -1,6 +1,6 @@
-package br.com.empresa.repository;
+package br.com.empresa.impl.business.repository;
 
-import br.com.empresa.entity.Funcionario;
+import br.com.empresa.impl.business.entity.Funcionario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

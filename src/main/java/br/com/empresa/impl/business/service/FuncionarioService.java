@@ -1,7 +1,6 @@
-package br.com.empresa.service;
+package br.com.empresa.impl.business.service;
 
-import br.com.empresa.dto.FuncionarioDTO;
-import org.springframework.http.ResponseEntity;
+import br.com.empresa.impl.business.dto.FuncionarioDTO;
 
 import java.util.List;
 import java.util.Optional;
