@@ -25,13 +25,19 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    private final ResponseMessage m201 = customMessage1();
+    private final ResponseMessage m200 = customMessage201();
+    private final ResponseMessage m202 = customMessage201();
+
+    private final ResponseMessage m301 = customMessage201();
+    private final ResponseMessage m302 = customMessage201();
+
+    private final ResponseMessage m201 = customMessage201();
     private final ResponseMessage m204put = simpleMessage(204, "Atualização ok");
     private final ResponseMessage m204del = simpleMessage(204, "Deleção ok");
     private final ResponseMessage m403 = simpleMessage(403, "Não autorizado");
     private final ResponseMessage m404 = simpleMessage(404, "Não encontrado");
     private final ResponseMessage m422 = simpleMessage(422, "Erro de validação");
-    private final ResponseMessage m500 = simpleMessage(500, "Erro inesperado");
+    private final ResponseMessage m500 = simpleMessage(500, "Gateway Timeout");
 
     @Bean
     public Docket api() {
@@ -63,20 +69,29 @@ public class SwaggerConfig {
         );
     }
 
-    private ResponseMessage simpleMessage(int code, String msg) {
-        return new ResponseMessageBuilder().code(code).message(msg).build();
-    }
-
-    private ResponseMessage customMessage1() {
-
+    private ResponseMessage customMessage201() {
         Map<String, Header> map = new HashMap<>();
-        map.put("location", new Header("location", "URI do novo recurso", new ModelRef("string")));
-
+        map.put("version", new Header("version", "api-version: 2019-09-09", new ModelRef("string")));
         return new ResponseMessageBuilder()
                 .code(201)
-                .message("Recurso criado")
+                .message("Created")
                 .headersWithDescription(map)
                 .build();
+    }
+
+    private ResponseMessage customMessage200() {
+        Map<String, Header> map = new HashMap<>();
+        map.put("version", new Header("version", "api-version: 2019-09-09", new ModelRef("string")));
+        return new ResponseMessageBuilder()
+                .code(200)
+                .message("Created")
+                .headersWithDescription(map)
+                .build();
+    }
+
+
+    private ResponseMessage simpleMessage(int code, String msg) {
+        return new ResponseMessageBuilder().code(code).message(msg).build();
     }
 
 }
