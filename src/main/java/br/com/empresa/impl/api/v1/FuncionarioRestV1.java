@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import br.com.empresa.impl.business.dto.FuncionarioDTO;
 import br.com.empresa.impl.business.service.FuncionarioService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +48,7 @@ public class FuncionarioRestV1 implements FuncionarioRestEndpointV1 {
 
     @Override
     @GetMapping("/findAll")
+    @ApiOperation(value = "Retorna todos funcionários", response = FuncionarioDTO[].class )
     public ResponseEntity<List<FuncionarioDTO>> buscaFuncionariosList() {
 
         ResponseEntity<List<FuncionarioDTO>> response = ResponseEntity.ok(funcionarioService.buscaFuncionariosList());
