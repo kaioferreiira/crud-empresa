@@ -25,30 +25,80 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    private final ResponseMessage m200 = customMessage201();
-    private final ResponseMessage m202 = customMessage201();
+    /* SUCESSFULL 2xx
+    * GET 200   OK
+    * POST 201  CREATED
+    * POST 202  ACCEPTED
+    * POST 204 NO CONTENT
+    * DEL  204 NO CONTENT
+    *
+    */
+    private final ResponseMessage m200get = simpleMessage(200, "OK");
+    private final ResponseMessage m201post = simpleMessage(201, "CREATED");
+    private final ResponseMessage m202post = simpleMessage(202, "ACCEPTED");
+    private final ResponseMessage m204post = simpleMessage(204, "NO CONTENT");
+    private final ResponseMessage m204put = simpleMessage(204, "NO CONTENT");
+    private final ResponseMessage m204del = simpleMessage(204, "NO CONTENT");
 
-    private final ResponseMessage m301 = customMessage201();
-    private final ResponseMessage m302 = customMessage201();
+    /* REDIRECT 3xx
+    * GET 301 MOVED PERMANENTLY
+    * GET 302 FOUND
+    *
+    */
+    private final ResponseMessage m301get = simpleMessage(301, "MOVED PERMANENTLY");
+    private final ResponseMessage m302get = simpleMessage(302, "FOUND");
 
-    private final ResponseMessage m201 = customMessage201();
-    private final ResponseMessage m204put = simpleMessage(204, "Atualização ok");
-    private final ResponseMessage m204del = simpleMessage(204, "Deleção ok");
-    private final ResponseMessage m403 = simpleMessage(403, "Não autorizado");
-    private final ResponseMessage m404 = simpleMessage(404, "Não encontrado");
-    private final ResponseMessage m422 = simpleMessage(422, "Erro de validação");
-    private final ResponseMessage m500 = simpleMessage(500, "Gateway Timeout");
+    /* CLIENT ERROR 4xx
+     * POST 400 BAD REQUEST
+     * GET  401 UNAUTHORIZED
+     * GET  403 FORBIDEN
+     * PUT  403 FORBIDEN
+     * DELL 403 FORBIDEN
+     * GET  404 NOT FOUND
+     * DELL 404 NOT FOUND
+     * PUT  415 UNSUPPORTED MEDIA TYPE
+     * POST 422 BUSSINESS ERROR
+     * PUT  422 BUSSINESS ERROR
+     *
+     */
+    private final ResponseMessage m400post = simpleMessage(400, "BAD REQUEST");
+    private final ResponseMessage m401get = simpleMessage(401, "UNAUTHORIZED");
+    private final ResponseMessage m403get = simpleMessage(403, "FORBIDEN");
+    private final ResponseMessage m403put = simpleMessage(403, "FORBIDEN");
+    private final ResponseMessage m403del = simpleMessage(403, "FORBIDEN");
+    private final ResponseMessage m404get = simpleMessage(404, "NOT FOUND");
+    private final ResponseMessage m404del = simpleMessage(404, "NOT FOUND");
+    private final ResponseMessage m415put = simpleMessage(415, "UNSUPPORTED MEDIA TYPE");
+    private final ResponseMessage m422post = simpleMessage(422, "BUSSINESS ERROR");
+    private final ResponseMessage m422put = simpleMessage(422, "BUSSINESS ERROR");
+
+    /* SERVER ERROR 5xx
+     * POST 500 INTERNAL SERVER ERROR
+     * DELL 500 INTERNAL SERVER ERROR
+     * POST 502 BAD REQUEST
+     * GET  503 SERVICE UNAVAILLABLE
+     * GET  504 GATEWAY TIMEOUT
+     *
+     */
+    private final ResponseMessage m500post = simpleMessage(500, "INTERNAL SERVER ERROR");
+    private final ResponseMessage m500del = simpleMessage(500, "INTERNAL SERVER ERROR");
+    private final ResponseMessage m500put = simpleMessage(500, "INTERNAL SERVER ERROR");
+    private final ResponseMessage m502post = simpleMessage(502, "BAD REQUEST");
+    private final ResponseMessage m503get = simpleMessage(503, "SERVICE UNAVAILLABLE");
+    private final ResponseMessage m505get = simpleMessage(504, "GATEWAY TIMEOUT");
+
+
+
 
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
 
                 .useDefaultResponseMessages(false)
-                .globalResponseMessage(RequestMethod.GET, Arrays.asList(m403, m404, m500))
-                .globalResponseMessage(RequestMethod.POST, Arrays.asList(m201, m403, m422, m500))
-                .globalResponseMessage(RequestMethod.PUT, Arrays.asList(m204put, m403, m404, m422, m500))
-                .globalResponseMessage(RequestMethod.DELETE, Arrays.asList(m204del, m403, m404, m500))
-
+                .globalResponseMessage(RequestMethod.GET, Arrays.asList(m200get, m301get, m302get, m401get, m403get, m404get, m503get, m505get))
+                .globalResponseMessage(RequestMethod.POST, Arrays.asList(m200get,m301get, m302get, m401get, m403get, m404get, m503get, m505get))
+                .globalResponseMessage(RequestMethod.PUT, Arrays.asList(m204put, m403put, m415put, m422put, m500put))
+                .globalResponseMessage(RequestMethod.DELETE, Arrays.asList(m204del, m403del, m404del, m500del))
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("br.com.empresa.impl.api"))
                 .paths(PathSelectors.any())
@@ -93,5 +143,12 @@ public class SwaggerConfig {
     private ResponseMessage simpleMessage(int code, String msg) {
         return new ResponseMessageBuilder().code(code).message(msg).build();
     }
+
+
+
+
+
+
+
 
 }
