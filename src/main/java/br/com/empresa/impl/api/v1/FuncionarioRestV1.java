@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import br.com.empresa.impl.business.dto.FuncionarioDTO;
 import br.com.empresa.impl.business.service.FuncionarioService;
+import br.com.empresa.impl.config.annotation.EmpresaSwaggerAPI;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping({"/v1/funcionarios"})
+@EmpresaSwaggerAPI(basePath = FuncionarioRestV1.BASE_PATH, title = "API - Funcionarios empresa V1", version = "v1")
+@RequestMapping(path = FuncionarioRestV1.BASE_PATH)
 public class FuncionarioRestV1 implements FuncionarioRestEndpointV1 {
 
+    public static final String BASE_PATH = "/v1/funcionarios";
 
     private FuncionarioService funcionarioService;
 
@@ -47,8 +50,11 @@ public class FuncionarioRestV1 implements FuncionarioRestEndpointV1 {
     }
 
     @Override
-    @GetMapping("/findAll")
-    @ApiOperation(value = "Retorna todos funcionários", response = FuncionarioDTO[].class )
+    @GetMapping(path = "/findAll",
+            headers = "Accept=application/empresa.funcionarios-v1+json",
+            produces = "application/empresa.funcionarios-v1+json"
+    )
+    @ApiOperation(value = "Retorna todos funcionários", response = String.class)
     public ResponseEntity<List<FuncionarioDTO>> buscaFuncionariosList() {
 
         ResponseEntity<List<FuncionarioDTO>> response = ResponseEntity.ok(funcionarioService.buscaFuncionariosList());
