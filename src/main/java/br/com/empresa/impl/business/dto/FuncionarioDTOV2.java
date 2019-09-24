@@ -10,12 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class FuncionarioDTO {
+public class FuncionarioDTOV2 {
 
     private Long id;
     private String nome;
     private String email;
     private String celular;
     private Integer idade;
+    private String novoParametro1;
 
 }

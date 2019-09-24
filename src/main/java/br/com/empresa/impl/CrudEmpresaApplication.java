@@ -1,9 +1,11 @@
 package br.com.empresa.impl;
 
-import br.com.empresa.impl.business.dto.FuncionarioDTO;
-import br.com.empresa.impl.business.entity.Funcionario;
-import br.com.empresa.impl.business.repository.FuncionarioRepository;
-import br.com.empresa.impl.business.service.FuncionarioServiceImpl;
+import br.com.empresa.impl.business.dto.FuncionarioDTOV1;
+import br.com.empresa.impl.business.dto.FuncionarioDTOV2;
+import br.com.empresa.impl.business.repository.V1.FuncionarioRepository;
+import br.com.empresa.impl.business.repository.V2.FuncionarioRepositoryV2;
+import br.com.empresa.impl.business.service.v1.FuncionarioServiceImpl;
+import br.com.empresa.impl.business.service.v2.FuncionarioServiceImplV2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +20,13 @@ public class CrudEmpresaApplication implements CommandLineRunner {
     @Autowired
     private FuncionarioServiceImpl funcionarioService;
 
+    @Autowired
+    private FuncionarioRepositoryV2 funcionarioRepositoryV2;
+
+    @Autowired
+    private FuncionarioServiceImplV2 funcionarioServiceImplV2;
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(CrudEmpresaApplication.class, args);
 	}
@@ -25,26 +34,53 @@ public class CrudEmpresaApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Funcionario funcionario = new Funcionario().builder()
-                .id(null)
-                .nome("teste")
-                .email("teste@teste.com.br")
-                .idade(26)
-                .celular("8299-8985")
-                .build();
-
-        System.out.println("Salvando funcionario: "  +  funcionario);
-        funcionarioRepository.save(funcionario);
-
-        FuncionarioDTO funcionarioDTO = new FuncionarioDTO()
+	    //v1
+        FuncionarioDTOV1 funcionarioDTOV1 = new FuncionarioDTOV1()
                 .builder()
-                .nome("teste 2")
-                .email("teste2@teste.com.br")
+                .nome("1 -Funcionario V1")
+                .email("1funcionariov1@teste.com.br")
                 .idade(22)
                 .celular("3242-8985")
                 .build();
 
-        funcionarioService.adicionaFuncionario(funcionarioDTO);
+
+        FuncionarioDTOV1 funcionarioDTOV2 = new FuncionarioDTOV1()
+                .builder()
+                .nome("2 -Funcionario V1")
+                .email("2funcionariov1@teste.com.br")
+                .idade(22)
+                .celular("3242-8985")
+                .build();
+
+        funcionarioService.adicionaFuncionario(funcionarioDTOV1);
+        funcionarioService.adicionaFuncionario(funcionarioDTOV2);
+
+        //v2
+        FuncionarioDTOV2 funcionarioDTOV21 = new FuncionarioDTOV2()
+                .builder()
+                .nome("1 -Funcionario V2")
+                .email("1funcionariov1@teste.com.br")
+                .idade(22)
+                .celular("3242-8985")
+                .novoParametro1("Novo Parametro v2")
+                .build();
+
+
+        FuncionarioDTOV2 funcionarioDTOV22 = new FuncionarioDTOV2()
+                .builder()
+                .nome("2 -Funcionario V2")
+                .email("2funcionariov1@teste.com.br")
+                .idade(22)
+                .celular("3242-8985")
+                .novoParametro1("Novo Parametro v2")
+                .build();
+
+
+        funcionarioServiceImplV2.adicionaFuncionario(funcionarioDTOV21);
+        funcionarioServiceImplV2.adicionaFuncionario(funcionarioDTOV22);
+
+
+
 
     }
 }

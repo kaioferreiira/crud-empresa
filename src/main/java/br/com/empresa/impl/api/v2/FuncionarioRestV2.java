@@ -1,68 +1,48 @@
 package br.com.empresa.impl.api.v2;
 
+import br.com.empresa.impl.business.dto.FuncionarioDTOV1;
+import br.com.empresa.impl.business.dto.FuncionarioDTOV2;
+import br.com.empresa.impl.business.service.v1.FuncionarioService;
+import br.com.empresa.impl.business.service.v2.FuncionarioServiceV2;
+import br.com.empresa.impl.config.annotation.EmpresaSwaggerAPI;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Objects;
 
-import br.com.empresa.impl.business.dto.FuncionarioDTO;
-import br.com.empresa.impl.business.service.FuncionarioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+//Exemplo implementação pelo Header
 @RestController
-@RequestMapping({"/v2/funcionarios"})
+@EmpresaSwaggerAPI(basePath = FuncionarioRestV2.BASE_PATH, title = "API - Funcionarios empresa V2", version = "v2")
+@RequestMapping(path = FuncionarioRestV2.BASE_PATH)
 public class FuncionarioRestV2 implements FuncionarioRestEndpointV2 {
 
+    public static final String BASE_PATH = "/funcionarios";
 
-    private FuncionarioService funcionarioService;
+    private FuncionarioServiceV2 funcionarioServiceV2;
 
     @Autowired
-    public FuncionarioRestV2(FuncionarioService funcionarioService) {
-        this.funcionarioService = funcionarioService;
+    public FuncionarioRestV2(FuncionarioServiceV2 funcionarioServiceV2) {
+        this.funcionarioServiceV2 = funcionarioServiceV2;
     }
 
-    @Override
-    @PostMapping("/")
-    public ResponseEntity<Void> adicionaFuncionario(FuncionarioDTO funcionarioDTO) {
-
-        funcionarioService.adicionaFuncionario(funcionarioDTO);
-        return ResponseEntity.ok().build();
-    }
 
     @Override
-    @GetMapping("/{codigoFuncionario}")
-    public ResponseEntity<FuncionarioDTO> buscaFuncionario(@PathVariable Long codigoFuncionario) {
+    @GetMapping(path = "/findAll",
+            headers = "Accept=application/empresa.funcionarios-v2+json",
+            produces = "application/vnd.empresa.funcionarios-v2+json"
+    )
+    @ApiOperation(value = "Retorna todos funcionários", response = String.class)
+    public ResponseEntity<List<FuncionarioDTOV2>> buscaFuncionariosList() {
 
-        ResponseEntity<FuncionarioDTO> funcionarioDTOResponseEntity = funcionarioService.buscaFuncionario(codigoFuncionario)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.noContent().build());
-
-        return funcionarioDTOResponseEntity;
-    }
-
-    @Override
-    @GetMapping("/findAll")
-    public ResponseEntity<List<FuncionarioDTO>> buscaFuncionariosList() {
-
-        ResponseEntity<List<FuncionarioDTO>> response = ResponseEntity.ok(funcionarioService.buscaFuncionariosList());
+        ResponseEntity<List<FuncionarioDTOV2>> response = ResponseEntity.ok(funcionarioServiceV2.buscaFuncionariosList());
         if (Objects.isNull(response.getBody())) {
             response = ResponseEntity.noContent().build();
         }
         return response;
-    }
-
-    @Override
-    @PutMapping("/{codigoFuncionario}")
-    public ResponseEntity<Void> atualizaFuncionario(Long codigoFuncionario, FuncionarioDTO funcionarioDTO) {
-
-        funcionarioService.atualizaFuncionario(codigoFuncionario, funcionarioDTO);
-
-        return null;
     }
 
 

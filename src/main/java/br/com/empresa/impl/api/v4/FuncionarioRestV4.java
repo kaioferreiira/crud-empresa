@@ -1,34 +1,23 @@
-package br.com.empresa.impl.api.v1;
+package br.com.empresa.impl.api.v4;
+
+import br.com.empresa.impl.business.dto.FuncionarioDTOV1;
+import br.com.empresa.impl.business.service.v1.FuncionarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
 
-import br.com.empresa.impl.business.dto.FuncionarioDTOV1;
-import br.com.empresa.impl.business.service.v1.FuncionarioService;
-import br.com.empresa.impl.config.annotation.EmpresaSwaggerAPI;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-
-//Exemplo implementação pelo Header
 @RestController
-@EmpresaSwaggerAPI(basePath = FuncionarioRestV1.BASE_PATH, title = "API - Funcionarios empresa V1", version = "v1")
-@RequestMapping(path = FuncionarioRestV1.BASE_PATH)
-public class FuncionarioRestV1 implements FuncionarioRestEndpointV1 {
+@RequestMapping({"/v4/funcionarios"})
+public class FuncionarioRestV4 implements FuncionarioRestEndpointV4 {
 
-    public static final String BASE_PATH = "/funcionarios";
 
     private FuncionarioService funcionarioService;
 
     @Autowired
-    public FuncionarioRestV1(FuncionarioService funcionarioService) {
+    public FuncionarioRestV4(FuncionarioService funcionarioService) {
         this.funcionarioService = funcionarioService;
     }
 
@@ -52,11 +41,7 @@ public class FuncionarioRestV1 implements FuncionarioRestEndpointV1 {
     }
 
     @Override
-    @GetMapping(path = "/findAll",
-            headers = "Accept=application/empresa.funcionarios-v1+json",
-            produces = "application/vnd.empresa.funcionarios-v1+json"
-    )
-    @ApiOperation(value = "Retorna todos funcionários", response = String.class)
+    @GetMapping("/findAll")
     public ResponseEntity<List<FuncionarioDTOV1>> buscaFuncionariosList() {
 
         ResponseEntity<List<FuncionarioDTOV1>> response = ResponseEntity.ok(funcionarioService.buscaFuncionariosList());

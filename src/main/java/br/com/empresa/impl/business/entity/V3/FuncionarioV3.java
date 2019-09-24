@@ -1,14 +1,14 @@
-package br.com.empresa.impl.business.entity;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+package br.com.empresa.impl.business.entity.V3;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
 @AllArgsConstructor
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Builder
-public class Funcionario {
+public class FuncionarioV3 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +26,7 @@ public class Funcionario {
     private String email;
     private String celular;
     private Integer idade;
+    private String novoParametro1;
+    private String novoParametro2;
 
 }

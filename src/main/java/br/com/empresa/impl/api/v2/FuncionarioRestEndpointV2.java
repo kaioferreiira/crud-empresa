@@ -1,18 +1,18 @@
 package br.com.empresa.impl.api.v2;
 
-import java.util.List;
-
-import br.com.empresa.impl.business.dto.FuncionarioDTO;
+import br.com.empresa.impl.business.dto.FuncionarioDTOV2;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface FuncionarioRestEndpointV2 {
 
-    ResponseEntity<List<FuncionarioDTO>> buscaFuncionariosList();
+    ResponseEntity<List<FuncionarioDTOV2>> buscaFuncionariosList();
 
-    ResponseEntity<FuncionarioDTO> buscaFuncionario(Long codigoFuncionario);
-
-    ResponseEntity<Void> adicionaFuncionario(FuncionarioDTO associado);
-
-    ResponseEntity<Void> atualizaFuncionario(Long codigoFuncionario, FuncionarioDTO funcionario);
+//    ResponseEntity<FuncionarioDTOV1> buscaFuncionario(Long codigoFuncionario);
+//
+//    ResponseEntity<Void> adicionaFuncionario(FuncionarioDTOV1 associado);
+//
+//    ResponseEntity<Void> atualizaFuncionario(Long codigoFuncionario, FuncionarioDTOV1 funcionario);
 
 }

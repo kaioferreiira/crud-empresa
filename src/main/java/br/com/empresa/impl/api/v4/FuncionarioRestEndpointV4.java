@@ -1,11 +1,11 @@
-package br.com.empresa.impl.api.v1;
-
-import java.util.List;
+package br.com.empresa.impl.api.v4;
 
 import br.com.empresa.impl.business.dto.FuncionarioDTOV1;
 import org.springframework.http.ResponseEntity;
 
-public interface FuncionarioRestEndpointV1 {
+import java.util.List;
+
+public interface FuncionarioRestEndpointV4 {
 
     ResponseEntity<List<FuncionarioDTOV1>> buscaFuncionariosList();
 
