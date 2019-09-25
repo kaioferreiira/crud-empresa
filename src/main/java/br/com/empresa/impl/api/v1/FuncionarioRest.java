@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import br.com.empresa.impl.business.dto.FuncionarioDTOV1;
 import br.com.empresa.impl.business.service.v1.FuncionarioService;
-import br.com.empresa.impl.config.annotation.EmpresaSwaggerAPI;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 //Exemplo implementação pelo Header
 @RestController
-@EmpresaSwaggerAPI(basePath = FuncionarioRestV1.BASE_PATH, title = "API - Funcionarios empresa V1", version = "v1")
-@RequestMapping(path = FuncionarioRestV1.BASE_PATH)
-public class FuncionarioRestV1 implements FuncionarioRestEndpointV1 {
+//@EmpresaSwaggerAPI(basePath = FuncionarioRestV1.BASE_PATH, title = "API - Funcionarios empresa V1", version = "v1")
+@RequestMapping(path = FuncionarioRest.BASE_PATH)
+public class FuncionarioRest implements FuncionarioRestEndpointV1 {
 
     public static final String BASE_PATH = "/funcionarios";
 
     private FuncionarioService funcionarioService;
 
     @Autowired
-    public FuncionarioRestV1(FuncionarioService funcionarioService) {
+    public FuncionarioRest(FuncionarioService funcionarioService) {
         this.funcionarioService = funcionarioService;
     }
 

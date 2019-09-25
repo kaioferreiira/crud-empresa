@@ -1,13 +1,18 @@
 package br.com.empresa.impl.api.v4;
 
+import java.util.List;
+import java.util.Objects;
+
 import br.com.empresa.impl.business.dto.FuncionarioDTOV1;
 import br.com.empresa.impl.business.service.v1.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Objects;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping({"/v4/funcionarios"})
