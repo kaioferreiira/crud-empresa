@@ -1,21 +1,20 @@
 package br.com.empresa.impl.business.service.v3;
 
-import br.com.empresa.impl.business.dto.FuncionarioDTOV1;
+import br.com.empresa.impl.business.dto.FuncionarioDTOV3;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface FuncionarioServiceV3 {
 
 
-    List<FuncionarioDTOV1> buscaFuncionariosList();
+    List<FuncionarioDTOV3> buscaFuncionariosList();
 
-    Optional<FuncionarioDTOV1> buscaFuncionario(Long codigoFuncionario);
+//    Optional<FuncionarioDTOV3> buscaFuncionario(Long codigoFuncionario);
+//
+    void adicionaFuncionario(FuncionarioDTOV3 associado);
 
-    void adicionaFuncionario(FuncionarioDTOV1 associado);
-
-    void atualizaFuncionario(Long codigoFuncionario, FuncionarioDTOV1 funcionario);
-
-
+//    void atualizaFuncionario(Long codigoFuncionario, FuncionarioDTOV3 funcionario);
+//
+//
 
 }

@@ -32,7 +32,7 @@ public class FuncionarioRestV2 implements FuncionarioRestEndpointV2 {
 
     @Override
     @GetMapping(path = "/findAll",
-            headers = "Accept=application/empresa.funcionarios-v2+json",
+//            headers = "Accept=application/empresa.funcionarios-v2+json"
             produces = "application/vnd.empresa.funcionarios-v2+json"
     )
     @ApiOperation(value = "Retorna todos funcionários", response = String.class)

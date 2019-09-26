@@ -1,11 +1,16 @@
 package br.com.empresa.impl.business.service.v3;
 
 import br.com.empresa.impl.business.dto.FuncionarioDTOV1;
+import br.com.empresa.impl.business.dto.FuncionarioDTOV3;
+import br.com.empresa.impl.business.dto.FuncionarioDTOV4;
 import br.com.empresa.impl.business.entity.V1.Funcionario;
+import br.com.empresa.impl.business.entity.V3.FuncionarioV3;
+import br.com.empresa.impl.business.entity.V4.FuncionarioV4;
 import br.com.empresa.impl.business.entity.converter.FuncionarioConverter;
 import br.com.empresa.impl.business.exception.FuncionarioExceptionMessage;
 import br.com.empresa.impl.business.exception.exceptions.ObjectNotFoundException;
 import br.com.empresa.impl.business.repository.V1.FuncionarioRepository;
+import br.com.empresa.impl.business.repository.V3.FuncionarioRepositoryV3;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,42 +22,30 @@ import java.util.stream.Collectors;
 public class FuncionarioServiceImplV3 implements FuncionarioServiceV3 {
 
 
-    private FuncionarioRepository funcionarioRepository;
+    private FuncionarioRepositoryV3 funcionarioRepository;
 
     @Autowired
-    public FuncionarioServiceImplV3(FuncionarioRepository funcionarioRepository) {
+    public FuncionarioServiceImplV3(FuncionarioRepositoryV3 funcionarioRepository) {
         this.funcionarioRepository = funcionarioRepository;
     }
 
     @Override
-    public void adicionaFuncionario(FuncionarioDTOV1 funcionarioDTOV1) {
-        saveEntity(FuncionarioConverter.toEntity(funcionarioDTOV1));
+    public List<FuncionarioDTOV3> buscaFuncionariosList() {
+        List<FuncionarioV3> listaFuncionarios = funcionarioRepository.findAll();
+        List<FuncionarioDTOV3> listFuncionarioDTOV3 = listaFuncionarios.stream().map(FuncionarioConverter::toDTOV3).collect(Collectors.toList());
+        return listFuncionarioDTOV3;
     }
+
 
     @Override
-    public List<FuncionarioDTOV1> buscaFuncionariosList() {
-        List<Funcionario> listaFuncionarios = funcionarioRepository.findAll();
-        List<FuncionarioDTOV1> listFuncionarioDTOV1 = listaFuncionarios.stream().map(FuncionarioConverter::toDTO).collect(Collectors.toList());
-        return listFuncionarioDTOV1;
+    public void adicionaFuncionario(FuncionarioDTOV3 funcionarioDTOV3) {
+        saveEntity(FuncionarioConverter.toEntityV3(funcionarioDTOV3));
     }
 
-    @Override
-    public Optional<FuncionarioDTOV1> buscaFuncionario(Long codigoFuncionario) {
-         return funcionarioRepository.findById(codigoFuncionario).map(FuncionarioConverter::toDTO);
-    }
-
-    @Override
-    public void atualizaFuncionario(Long codigoFuncionario, FuncionarioDTOV1 funcionarioDTOV1) {
-
-        funcionarioRepository.findById(codigoFuncionario).orElseThrow(() -> new ObjectNotFoundException(FuncionarioExceptionMessage.ERRO_ENCONTRAR_DADOS_DO_FUNCIONARIO));
-
-        Funcionario  funcionarioEntity = FuncionarioConverter.toEntity(funcionarioDTOV1);
-        funcionarioEntity.setId(codigoFuncionario);
-        saveEntity(funcionarioEntity);
-    }
-
-    private void saveEntity(Funcionario funcionario) {
+    private void saveEntity(FuncionarioV3 funcionario) {
         funcionarioRepository.save(funcionario);
     }
+
+
 
 }

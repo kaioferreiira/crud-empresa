@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import br.com.empresa.impl.business.dto.FuncionarioDTOV1;
 import br.com.empresa.impl.business.service.v1.FuncionarioService;
+import br.com.empresa.impl.config.annotation.EmpresaSwaggerAPI;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-//Exemplo implementação pelo Header
 @RestController
-//@EmpresaSwaggerAPI(basePath = FuncionarioRestV1.BASE_PATH, title = "API - Funcionarios empresa V1", version = "v1")
+//@EmpresaSwaggerAPI(basePath = FuncionarioRest.BASE_PATH, title = "API - Funcionarios empresa V1", version = "v1")
 @RequestMapping(path = FuncionarioRest.BASE_PATH)
 public class FuncionarioRest implements FuncionarioRestEndpointV1 {
 
@@ -52,7 +52,7 @@ public class FuncionarioRest implements FuncionarioRestEndpointV1 {
 
     @Override
     @GetMapping(path = "/findAll",
-            headers = "Accept=application/empresa.funcionarios-v1+json",
+//            headers = "Accept=application/empresa.funcionarios-v1+json",
             produces = "application/vnd.empresa.funcionarios-v1+json"
     )
     @ApiOperation(value = "Retorna todos funcionários", response = String.class)
