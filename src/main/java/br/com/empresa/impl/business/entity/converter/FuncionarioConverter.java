@@ -1,17 +1,16 @@
 package br.com.empresa.impl.business.entity.converter;
 
-import java.util.Objects;
-
-import br.com.empresa.impl.business.dto.FuncionarioDTOV1;
-import br.com.empresa.impl.business.dto.FuncionarioDTOV2;
-import br.com.empresa.impl.business.dto.FuncionarioDTOV3;
-import br.com.empresa.impl.business.dto.FuncionarioDTOV4;
+import br.com.empresa.impl.business.dto.*;
 import br.com.empresa.impl.business.entity.V1.Funcionario;
 import br.com.empresa.impl.business.entity.V2.FuncionarioV2;
 import br.com.empresa.impl.business.entity.V3.FuncionarioV3;
 import br.com.empresa.impl.business.entity.V4.FuncionarioV4;
-import br.com.empresa.impl.business.exception.exceptions.ValidationException;
+import br.com.empresa.impl.business.entity.V5.FuncionarioV5;
 import br.com.empresa.impl.business.exception.FuncionarioExceptionMessage;
+import br.com.empresa.impl.business.exception.exceptions.ValidationException;
+
+import java.util.Objects;
+
 
 public class FuncionarioConverter {
 
@@ -62,6 +61,21 @@ public class FuncionarioConverter {
                 funcionarioDTOV4.getNovoParametro3());
     }
 
+
+    public static FuncionarioV5 toEntityV5(FuncionarioDTOV5 funcionarioDTOV5) {
+        if (Objects.isNull(funcionarioDTOV5)) {
+            throw new ValidationException(FuncionarioExceptionMessage.ERRO_DADOS_INVALIDOS_ASSOCIADO);
+        }
+        return new FuncionarioV5(funcionarioDTOV5.getId(),
+                funcionarioDTOV5.getNome(),
+                funcionarioDTOV5.getEmail(),
+                funcionarioDTOV5.getCelular(),
+                funcionarioDTOV5.getIdade(),
+                funcionarioDTOV5.getNovoParametro1(),
+                funcionarioDTOV5.getNovoParametro2(),
+                funcionarioDTOV5.getNovoParametro3(),
+                funcionarioDTOV5.getNovoParametro4());
+    }
 
 
     public static FuncionarioDTOV1 toDTO(Funcionario funcionario){
@@ -123,6 +137,25 @@ public class FuncionarioConverter {
                 .novoParametro1(funcionario.getNovoParametro1())
                 .novoParametro2(funcionario.getNovoParametro2())
                 .novoParametro3(funcionario.getNovoParametro3())
+                .build();
+    }
+
+
+    public static FuncionarioDTOV5 toDTOV5(FuncionarioV5 funcionario){
+        if(Objects.isNull(funcionario)){
+            return null;
+        }
+        return new FuncionarioDTOV5()
+                .builder()
+                .id(funcionario.getId())
+                .nome(funcionario.getNome())
+                .email(funcionario.getEmail())
+                .idade(funcionario.getIdade())
+                .celular(funcionario.getCelular())
+                .novoParametro1(funcionario.getNovoParametro1())
+                .novoParametro2(funcionario.getNovoParametro2())
+                .novoParametro3(funcionario.getNovoParametro3())
+                .novoParametro4(funcionario.getNovoParametro4())
                 .build();
     }
 

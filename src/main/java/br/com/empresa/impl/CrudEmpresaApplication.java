@@ -1,12 +1,10 @@
 package br.com.empresa.impl;
 
-import br.com.empresa.impl.business.dto.FuncionarioDTOV1;
-import br.com.empresa.impl.business.dto.FuncionarioDTOV2;
-import br.com.empresa.impl.business.dto.FuncionarioDTOV3;
-import br.com.empresa.impl.business.dto.FuncionarioDTOV4;
+import br.com.empresa.impl.business.dto.*;
 import br.com.empresa.impl.business.repository.V1.FuncionarioRepository;
 import br.com.empresa.impl.business.repository.V2.FuncionarioRepositoryV2;
 import br.com.empresa.impl.business.repository.V3.FuncionarioRepositoryV3;
+import br.com.empresa.impl.business.service.V5.FuncionarioServiceImplV5;
 import br.com.empresa.impl.business.service.v1.FuncionarioServiceImpl;
 import br.com.empresa.impl.business.service.v2.FuncionarioServiceImplV2;
 import br.com.empresa.impl.business.service.v3.FuncionarioServiceImplV3;
@@ -24,16 +22,19 @@ public class CrudEmpresaApplication implements CommandLineRunner {
     private FuncionarioServiceImplV2 funcionarioServiceImplV2;
     private FuncionarioServiceImplV3 funcionarioServiceImplV3;
     private FuncionarioServiceImplV4 funcionarioServiceImplV4;
+    private FuncionarioServiceImplV5 funcionarioServiceImplV5;
 
     @Autowired
     public CrudEmpresaApplication(FuncionarioServiceImpl funcionarioService,
                                   FuncionarioServiceImplV2 funcionarioServiceImplV2,
                                   FuncionarioServiceImplV3 funcionarioServiceImplV3,
-                                  FuncionarioServiceImplV4 funcionarioServiceImplV4) {
+                                  FuncionarioServiceImplV4 funcionarioServiceImplV4,
+                                  FuncionarioServiceImplV5 funcionarioServiceImplV5) {
         this.funcionarioService = funcionarioService;
         this.funcionarioServiceImplV2 = funcionarioServiceImplV2;
         this.funcionarioServiceImplV3 = funcionarioServiceImplV3;
         this.funcionarioServiceImplV4 = funcionarioServiceImplV4;
+        this.funcionarioServiceImplV5 = funcionarioServiceImplV5;
     }
 
     public static void main(String[] args) {
@@ -137,5 +138,33 @@ public class CrudEmpresaApplication implements CommandLineRunner {
         funcionarioServiceImplV4.adicionaFuncionario(funcionarioDTOV41);
         funcionarioServiceImplV4.adicionaFuncionario(funcionarioDTOV42);
 
+
+        //v4
+        FuncionarioDTOV5 funcionarioDTOV51 = new FuncionarioDTOV5()
+                .builder()
+                .nome("1 -Funcionario V5")
+                .email("1funcionariov5@teste.com.br")
+                .idade(22)
+                .celular("3242-8985")
+                .novoParametro1("Novo Parametro 1 v5")
+                .novoParametro2("Novo Parametro 2 v5")
+                .novoParametro3("Novo Parametro 3 v5")
+                .novoParametro4("Novo Parametro 4 v5")
+                .build();
+
+        FuncionarioDTOV5 funcionarioDTOV52 = new FuncionarioDTOV5()
+                .builder()
+                .nome("2 -Funcionario V5")
+                .email("2funcionariov5@teste.com.br")
+                .idade(22)
+                .celular("3242-8985")
+                .novoParametro1("Novo Parametro 1 v5")
+                .novoParametro2("Novo Parametro 2 v5")
+                .novoParametro3("Novo Parametro 3 v5")
+                .novoParametro4("Novo Parametro 4 v5")
+                .build();
+
+        funcionarioServiceImplV5.adicionaFuncionario(funcionarioDTOV51);
+        funcionarioServiceImplV5.adicionaFuncionario(funcionarioDTOV52);
     }
 }

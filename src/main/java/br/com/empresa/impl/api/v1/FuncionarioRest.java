@@ -55,7 +55,7 @@ public class FuncionarioRest implements FuncionarioRestEndpointV1 {
 //            headers = "Accept=application/empresa.funcionarios-v1+json",
             produces = "application/vnd.empresa.funcionarios-v1+json"
     )
-    @ApiOperation(value = "Retorna todos funcionários", response = String.class)
+    @ApiOperation(value = "Retorna todos funcionários", response = FuncionarioDTOV1.class)
     public ResponseEntity<List<FuncionarioDTOV1>> buscaFuncionariosList() {
 
         ResponseEntity<List<FuncionarioDTOV1>> response = ResponseEntity.ok(funcionarioService.buscaFuncionariosList());
